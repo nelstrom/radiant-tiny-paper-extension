@@ -4,7 +4,7 @@ function instantiateEditor(partIndex){
     addEditor(partIndex);
   }
 }
-
+ 
 function toggleEditor(partIndex){
   var filterId = $('part_' + partIndex + '_filter_id');
   if(filterId.value == 'Rich Text Editor'){
@@ -12,15 +12,18 @@ function toggleEditor(partIndex){
   }
   else{
     removeEditor(partIndex)
-  } 
+  }
 }
-
+ 
 function removeEditor(partIndex){
-  var usedTextArea = $('part_' + partIndex + '_content')
-  tinyMCE.execCommand('mceRemoveControl', false, usedTextArea ); 
+  tinyMCE.execCommand('mceRemoveControl', false, textAreaId(partIndex) );
+}
+ 
+function addEditor(partIndex){
+  tinyMCE.execCommand('mceAddControl', false, textAreaId(partIndex) );
+}
+ 
+function textAreaId(partIndex){
+  return 'part_' + partIndex + '_content';
 }
 
-function addEditor(partIndex){
-  var usedTextArea = $('part_' + partIndex + '_content')  
-  tinyMCE.execCommand('mceAddControl', false, usedTextArea);   
-}
